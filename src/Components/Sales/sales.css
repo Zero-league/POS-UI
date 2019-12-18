@@ -1,0 +1,21 @@
+/* Inactive tab */
+
+.tabStyle ul>li>a {
+    background-color: #e6b2c6;
+    color: black;
+    font-size: 18px;
+}
+
+.tabStyle ul>li>a:hover {
+    background-color: #f67280;
+}
+
+
+/* Active tab */
+
+.tabStyle ul>li.active>a,
+.tabStyle ul>li.active>a:hover,
+.tabStyle ul>li.active>a:focus {
+    background-color: #2d132c;
+    color: white;
+}

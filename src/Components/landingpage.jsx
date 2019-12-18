@@ -5,15 +5,18 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import SalesImg from './Images/receipts.jpg';
+import InventoryImg from './Images/inven-images.jpg';
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345,
-    marginLeft: 250,
-    margin: 100,
+    width: 250,
+    margin: 50,
+        
   },
   media: {
     height: 140,
+    Width: 200,
   },
 
 });
@@ -22,21 +25,23 @@ export default function LandingPage() {
   const classes = useStyles();
 
   return (
-    <div styles={{display: 'flex'}}>
+    <div className="d-flex">
         <div>
-            <Card className={classes.card}>
+            <Card className={classes.card} style={{marginLeft: 250}}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image="./Images/paper-receipts.jpg"
+                        image={SalesImg}
                         title="Sales and Billing"
                     />
                 </CardActionArea>
-                <CardActions>
-                    <Button size="large" color="secondary" >
-                    Sales and Billing
-                    </Button>
-                </CardActions>
+                <div>
+                    <CardActions>
+                        <Button size="large" color="secondary">
+                        Sales and Billing
+                        </Button>
+                    </CardActions>
+                </div>
             </Card>
         </div>
         <div>
@@ -44,7 +49,7 @@ export default function LandingPage() {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image="./Images/inven-images.jpg"
+                        image={InventoryImg}
                         title="Inventory"
                     />
                 </CardActionArea>
