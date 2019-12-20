@@ -2,8 +2,8 @@ import React, { useState,useEffect } from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
-import viewExpenses from './Expenses/viewExpenses';
 import ViewExpenses from './Expenses/viewExpenses';
+import AddExpenses from './Expenses/addExpnses';
 
 const Expenses = () =>{
     
@@ -13,9 +13,10 @@ const Expenses = () =>{
                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                 <Tab eventKey="view" title="View">
                     <ViewExpenses/>
+                    
                 </Tab>
                 <Tab eventKey="add" title="Add">
-                    {/* <Sonnet /> */}
+                    <AddExpenses />
                 </Tab>
             </Tabs>
             </div>
