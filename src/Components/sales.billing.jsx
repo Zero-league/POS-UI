@@ -15,7 +15,7 @@ function Sales() {
                     <Tab eventKey="addSale" title="Add Sale">
                         <AddSale/>
                     </Tab>
-                    <Tab eventKey="viewSales" title="View Sales" style={{backgroundColor:'#f6c3e5'}}>
+                    <Tab eventKey="viewSales" title="View Sales">
                         <ViewSale/>
                     </Tab>
                 </Tabs>
