@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Table} from 'react-bootstrap';
+import {Table, Button} from 'react-bootstrap';
 
 function ViewSales() {
 
@@ -19,7 +19,7 @@ function ViewSales() {
     return(
         <div>
             <div className="container">
-                <h2 style={{margin:20}}>Bills List</h2>
+                <h6 style={{margin:20}}>Bills List</h6>
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
@@ -28,6 +28,9 @@ function ViewSales() {
                         <th scope="col">Dicount</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Sales Person</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +41,9 @@ function ViewSales() {
                             <td>{y.discount}</td>
                             <td>{y.amount}</td>
                             <td>{y.salesPerson}</td>
+                            <td><Button variant="info">View</Button></td>
+                            <td><Button variant="success">Edit</Button></td>
+                            <td><Button variant="danger">Delete</Button></td>
                         </tr>
                         )}
 
