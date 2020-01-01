@@ -9,7 +9,7 @@ function ViewSales() {
 
     useEffect(() => {
         
-        fetch("https://localhost:44361/api/bills")
+        fetch("http://localhost:12517/api/bills")
         .then(x => x.json())
         .then(x => {
             setlistSales(x)
@@ -26,7 +26,8 @@ function ViewSales() {
                         <th scope="col">ID</th>
                         <th scope="col">Date</th>
                         <th scope="col">Dicount</th>
-                        <th scope="col">Amount</th>
+                        <th scope="col">Gross Amount</th>
+                        <th scope="col">Net Amount</th>
                         <th scope="col">Sales Person</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -39,10 +40,11 @@ function ViewSales() {
                             <th>{y.id}</th>
                             <td>{y.dateTime}</td>
                             <td>{y.discount}</td>
-                            <td>{y.amount}</td>
+                            <td>{y.groceAmount}</td>
+                            <td>{y.netAmount}</td>
                             <td>{y.salesPerson}</td>
                             <td><Button variant="info">View</Button></td>
-                            <td><Button variant="success">Edit</Button></td>
+                            <td><Button variant="warning">Edit</Button></td>
                             <td><Button variant="danger">Delete</Button></td>
                         </tr>
                         )}

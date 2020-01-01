@@ -9,14 +9,13 @@ import AddExpenses from './Expenses/addExpnses';
 const Expenses = () =>{
     
         return(
-            <div style={{width: '100%', margin: 'auto'}}>
-               <h1>Expenses</h1>
-               <Tabs defaultActiveKey="add" id="uncontrolled-tab-example">
-                <Tab eventKey="view" title="View">
+            <div className="container" style={{margin: 40}}>
+               <Tabs defaultActiveKey="view" id="uncontrolled-tab-example">
+                <Tab eventKey="view" title="View Expenses">
                     <ViewExpenses/>
                     
                 </Tab>
-                <Tab eventKey="add" title="Add">
+                <Tab eventKey="add" title="Add Expenses">
                     <AddExpenses />
                 </Tab>
                 {/* <img src={gro}/> */}
