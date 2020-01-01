@@ -1,39 +1,81 @@
 import React, {useState, useEffect} from 'react';
 import {Form, Button, Row, Col, Table} from 'react-bootstrap';
 
-function AddSale(props) {
-
+class AddSale extends React.Component {
+  
   constructor() {
+    super();
 
-  // handleSubmit=(event)=>{
-  //   event.preventDefault();
-    
-  //   var obj = {
-       
-  //   }
-  //}
-   //onSubmit={handleSubmit}
+    this.state = {
+      itemName: '',
+      price: '',
+      quantity: '',
+      items: []
+    }
+  };
 
-  return (
-    <div className="container" style={{margin: 20}}>
-      <div>
-        <Form>
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    let items = [...this.state.items];
+
+    items.push({itemName: this.state.itemName, price: this.state.price, quantity: this.state.quantity});
+
+    this.setState({
+      items,
+      itemName: '',
+      price: '',
+      quantity: '',
+    });
+  };
+
+  handleInputChange = (e) => {
+    let input = e.target;
+    let name = e.target.name;
+    let value = input.value;
+
+    this.setState({
+      [name]: value
+    })
+  };
+
+  render() {
+
+    return(
+    <div>
+
+      <div className="App">
+        <Form1 handleFormSubmit={ this.handleFormSubmit } handleInputChange={ this.handleInputChange } newItemName={ this.state.itemName } newPrice={ this.state.price } newQuantity={ this.state.quantity }/>
+        <Table1 items={ this.state.items }/>
+      </div>
+
+    </div>
+
+  );
+  }
+}
+
+class Form1 extends React.Component {
+  render() {
+    return (
+      <div id="Form" className="container" style={{margin: 20}}>
+        <Form onSubmit={this.props.handleFormSubmit}>
           <div>
-            <Form.Group as={Row} controlId="formHorizontalDate">
+            {/* <Form.Group as={Row} controlId="formHorizontalDate">
               <Form.Label column sm={2}>
                 Date
               </Form.Label>
               <Col sm={2}>
-                <Form.Control type="date" placeholder="Date" value="date"/>
+                <Form.Control type="date" placeholder={Date} value={date}/>
               </Col>
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group as={Row} controlId="formHorizontalItem">
               <Form.Label column sm={2}>
                 Item Name
               </Form.Label>
               <Col sm={4}>
-                <Form.Control type="text" placeholder="Item Name" value="itemName"/>
+                <input id="itemName" value={this.props.newItemName} type="text" name="itemName" onChange={this.props.handleInputChange} />
               </Col>
             </Form.Group>
 
@@ -42,103 +84,66 @@ function AddSale(props) {
                 Retail Price
               </Form.Label>
               <Col sm={2}>
-                <Form.Control type="text" placeholder="Retail Price" value="retailPrice"/>
+                <input id="price" value={this.props.newPrice} type="text" name="price" onChange={this.props.handleInputChange}/>
               </Col>
             </Form.Group>
 
-            <Form.Row>
-              <Form.Group as={Row} s="4" controlId="formHorizontalQty">
-                <Form.Label column >
+            <Form.Group as={Row} controlId="formHorizontalQty">
+                <Form.Label column sm={2} >
                   Quantity
                 </Form.Label>
+                <Col sm={2}>
+                <input id="quantity" value={this.props.newQuantity} type="text" name="quantity" onChange={this.props.handleInputChange}/>
+              </Col>
+              </Form.Group>
+              <Form.Group as={Row}>
                 <Col>
-                  <Form.Control type="text" placeholder="Quantity" style={{marginLeft: 30}} value="qty"/>
                 </Col>
               </Form.Group>
-              <Form.Group as={Col} s="4">
-                <Col>
-                </Col>
-              </Form.Group>
-              <Form.Group as={Col} s="4">
+              <Form.Group as={Row}>
                 <Col>
                   <Button type="submit">Add to Bill</Button>
                 </Col>
               </Form.Group>
-            </Form.Row>
           </div>
           
-           <div>
-            <Table striped bordered hover size="sm" style={{backgroundColor:'#f3f3f3'}}>
-              <thead>
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Item Name</th>
-                  <th scope="col">Retail Price</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th></th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
+          
         </Form>
       </div>
-      
-      <div>
-        <Form>
-          <Form.Row>
-          <Form.Group as={Row} s="4" controlId="formHorizontalGrossAmount">
-              <Form.Label column >
-                Gross Amount
-              </Form.Label>
-              <Col>
-                <Form.Control type="text" placeholder="Gross Amount" style={{marginLeft: 20}} value="grossAmount" readOnly/>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Col} s="4">
-              <Col>
-              </Col>
-            </Form.Group>
-            {/* <Form.Group as={Row} s="4" controlId="formHorizontalSalesPerson">
-              <Form.Label column >
-                Sales Person
-              </Form.Label>
-              <Col>
-                <Form.Control type="salesPerson" placeholder="Sales Person" />
-              </Col>
-            </Form.Group> */}
-        </Form.Row>
-        
-          <Form.Group as={Row} controlId="formHorizontalDiscount">
-            <Form.Label column sm={2}>
-              Discount
-            </Form.Label>
-            <Col sm={2}>
-              <Form.Control type="text" placeholder="Discount" value="discount" readOnly/>
-            </Col>
-          </Form.Group> 
+    );
+  }
+}
 
-          <Form.Group as={Row} controlId="formHorizontalNetAmount">
-            <Form.Label column sm={2}>
-              Net Amount
-            </Form.Label>
-            <Col sm={2}>
-              <Form.Control type="text" placeholder="Net Amount" value="netAmount" readOnly/>
-            </Col>
-          </Form.Group>
-        </Form>
-      </div>
+class Table1 extends React.Component {
+  render() {
+    const items = this.props.items;
+    return (
+      <div>
+      <Table id="Table" striped bordered hover size="sm" style={{backgroundColor:'#f3f3f3'}}>
+        <thead>
+          <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Retail Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map( item => { 
+          return(
+            <tr>
+            <td>{item.itemName}</td>
+            <td>{item.price}</td>
+            <td>{item.quantity}</td>
+            <td>{item.price*item.quantity}</td>
+          </tr>
+          );  
+        })}
+        </tbody>
+      </Table>
     </div>
-    
-  );
+    );
+  }
 }
 
 export default AddSale;
