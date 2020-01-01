@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+// import gro from './Images/gro.jpg';
 
 import ViewExpenses from './Expenses/viewExpenses';
 import AddExpenses from './Expenses/addExpnses';
@@ -17,6 +18,7 @@ const Expenses = () =>{
                 <Tab eventKey="add" title="Add Expenses">
                     <AddExpenses />
                 </Tab>
+                {/* <img src={gro}/> */}
             </Tabs>
             </div>
         )
