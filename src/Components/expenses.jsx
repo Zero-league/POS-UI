@@ -11,7 +11,7 @@ const Expenses = () =>{
         return(
             <div style={{width: '100%', margin: 'auto'}}>
                <h1>Expenses</h1>
-               <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+               <Tabs defaultActiveKey="add" id="uncontrolled-tab-example">
                 <Tab eventKey="view" title="View">
                     <ViewExpenses/>
                     

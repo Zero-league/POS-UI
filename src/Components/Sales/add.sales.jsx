@@ -3,10 +3,7 @@ import {Form, Button, Row, Col, Table} from 'react-bootstrap';
 
 function AddSale(props) {
 
-  const [date, setDate] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
+  constructor() {
 
   // handleSubmit=(event)=>{
   //   event.preventDefault();
