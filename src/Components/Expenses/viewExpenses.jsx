@@ -10,7 +10,7 @@ const ViewExpenses = () =>{
     // }
 
     useEffect(() =>{
-        fetch('http://localhost:53389/api/expense')
+        fetch('http://localhost:12517/api/expense')
         .then(x => x.json())
         .then(x => {
             setListExpenses(x);
@@ -20,7 +20,7 @@ const ViewExpenses = () =>{
 
     return(
         <div>
-            <h5>All Expenses</h5>
+            <h6>Expenses</h6>
             <Table striped bordered hover>
                 <thead>
                     <tr>

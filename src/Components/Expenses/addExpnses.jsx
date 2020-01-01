@@ -3,7 +3,7 @@ import InputFields from './InputFields';
 import Button from 'react-bootstrap/Button';
 
 const AddExpense = () => {
-    const [name, setname] = useState('');
+    const [expenseType, setexpenseType] = useState('');
     const [date, setdate] = useState('');
     const [payment, setpayment] = useState('');
     
@@ -11,13 +11,13 @@ const AddExpense = () => {
     const _onSubmit = async (e) => {
         e.preventDefault();
         const data = {
-            Name: name,
+            expenseType: expenseType,
             Date: date,
             Payment: payment,
             
         };
         console.log(data);
-        const response = await fetch('http://localhost:53389/api/expense', {
+        const response = await fetch('http://localhost:12517/api/expense', {
           headers: {
                 'Accept': 'application/json, text/plain',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -31,15 +31,15 @@ const AddExpense = () => {
 
     return (
         <>
-            <h5>Add an Expense</h5>
+            <h6>Add an Expense</h6>
             <div className="row" style={{ display: "flex", justifyContent:"center" }}>
                 <div className="col-4">
                     <form onSubmit={_onSubmit}>
                         <InputFields
-                            name="name"
-                            label="Name"
-                            value={name}
-                            onChange={setname}
+                            name="expenseType"
+                            label="expenseType"
+                            value={expenseType}
+                            onChange={setexpenseType}
                         />
                         <InputFields
                             name="date"
