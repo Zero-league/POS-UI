@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 
 
     
@@ -42,7 +40,7 @@ import { useDispatch } from "react-redux";
   
         console.log(obj);
   
-        const response = await  fetch('http://localhost:12517/api/post',{
+        const response = await  fetch('https://localhost:44361/api/post',{
               headers: { 
                 'Accept': 'application/json, text/plain',
                 'Content-Type': 'application/json;charset=UTF-8'
