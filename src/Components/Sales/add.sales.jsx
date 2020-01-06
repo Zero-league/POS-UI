@@ -1,33 +1,111 @@
-import React, {useState, useEffect} from 'react';
-import {Form, Button, Row, Col, Table} from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Form, Button, Row, Col, Table } from "react-bootstrap";
 
-function AddSale(props) {
+class AddSale extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const [date, setDate] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
+    this.state = {
+      id: "",
+      itemName: "",
+      price: "",
+      quantity: "",
+      items: [],
+      totalAmount: "",
+      tot: "",
+      x: "",
+      discount: ""
+    };
+  }
 
-  // handleSubmit=(event)=>{
-  //   event.preventDefault();
-    
-  //   var obj = {
-       
-  //   }
-  //}
-   //onSubmit={handleSubmit}
+  handleFormSubmit = e => {
+    e.preventDefault();
 
-  return (
-    <div className="container" style={{margin: 20}}>
+    let items = [...this.state.items];
+
+    let tot = this.state.price * this.state.quantity;
+    this.state.x = +this.state.x + +tot;
+    console.log("tot is" + tot);
+
+    items.push({
+      itemName: this.state.itemName,
+      price: this.state.price,
+      quantity: this.state.quantity
+    });
+
+    this.setState({
+      items,
+      itemName: "",
+      price: "",
+      quantity: "",
+      tot: this.state.x,
+      discount: ""
+    });
+  };
+
+  addPrice = e => {
+    this.setState({
+      totalAmount: e.target.value
+    });
+  };
+
+  handleInputChange = e => {
+    let input = e.target;
+    let name = e.target.name;
+    let value = input.value;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  // discountHandleInputChange = (e) => {
+  //   this.setState({
+  //     discount: e.target.discount
+  //   })
+  // };
+
+  render() {
+    return (
       <div>
-        <Form>
+        <div className="App">
+          <div>
+            <Form1
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+            newItemName={this.state.itemName}
+            newPrice={this.state.price}
+            newQuantity={this.state.quantity}
+          />
+          <Table1
+            items={this.state.items}
+            tot={this.state.tot}
+            newDiscount={this.state.discount}
+          />
+          </div>  
+        </div>
+        <div className="container" style={{display: 'flex'}}>
+          <div style={{justifyContent: 'flex-end'}}>
+            <Button variant="success" type="submit">Print</Button>
+          </div>
+        </div> 
+      </div>
+    );
+  }
+}
+
+class Form1 extends React.Component {
+  render() {
+    return (
+      <div id="Form" className="container" style={{ margin: 20 }}>
+        <Form onSubmit={this.props.handleFormSubmit}>
           <div>
             <Form.Group as={Row} controlId="formHorizontalDate">
               <Form.Label column sm={2}>
                 Date
               </Form.Label>
               <Col sm={2}>
-                <Form.Control type="date" placeholder="Date" value="date"/>
+                <Form.Control type="date" />
               </Col>
             </Form.Group>
 
@@ -36,7 +114,13 @@ function AddSale(props) {
                 Item Name
               </Form.Label>
               <Col sm={4}>
-                <Form.Control type="text" placeholder="Item Name" value="itemName"/>
+                <input
+                  id="itemName"
+                  value={this.props.newItemName}
+                  type="text"
+                  name="itemName"
+                  onChange={this.props.handleInputChange}
+                />
               </Col>
             </Form.Group>
 
@@ -45,103 +129,92 @@ function AddSale(props) {
                 Retail Price
               </Form.Label>
               <Col sm={2}>
-                <Form.Control type="text" placeholder="Retail Price" value="retailPrice"/>
+                <input
+                  id="price"
+                  value={this.props.newPrice}
+                  type="text"
+                  name="price"
+                  onChange={this.props.handleInputChange}
+                />
               </Col>
             </Form.Group>
 
-            <Form.Row>
-              <Form.Group as={Row} s="4" controlId="formHorizontalQty">
-                <Form.Label column >
-                  Quantity
-                </Form.Label>
-                <Col>
-                  <Form.Control type="text" placeholder="Quantity" style={{marginLeft: 30}} value="qty"/>
-                </Col>
-              </Form.Group>
-              <Form.Group as={Col} s="4">
-                <Col>
-                </Col>
-              </Form.Group>
-              <Form.Group as={Col} s="4">
-                <Col>
-                  <Button type="submit">Add to Bill</Button>
-                </Col>
-              </Form.Group>
-            </Form.Row>
-          </div>
-          
-           <div>
-            <Table striped bordered hover size="sm" style={{backgroundColor:'#f3f3f3'}}>
-              <thead>
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Item Name</th>
-                  <th scope="col">Retail Price</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th></th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </Table>
+            <Form.Group as={Row} controlId="formHorizontalQty">
+              <Form.Label column sm={2}>
+                Quantity
+              </Form.Label>
+              <Col sm={2}>
+                <input
+                  id="quantity"
+                  value={this.props.newQuantity}
+                  type="text"
+                  name="quantity"
+                  onChange={this.props.handleInputChange}
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col></Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col>
+                <Button type="submit">Add to Bill</Button>
+              </Col>
+            </Form.Group>
           </div>
         </Form>
       </div>
-      
+    );
+  }
+}
+
+class Table1 extends React.Component {
+  render() {
+    const items = this.props.items;
+    const tot = this.props.tot;
+    const discount = this.props.discount;
+    console.log(this.props.tot);
+
+    return (
       <div>
-        <Form>
-          <Form.Row>
-          <Form.Group as={Row} s="4" controlId="formHorizontalGrossAmount">
-              <Form.Label column >
-                Gross Amount
-              </Form.Label>
-              <Col>
-                <Form.Control type="text" placeholder="Gross Amount" style={{marginLeft: 20}} value="grossAmount" readOnly/>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Col} s="4">
-              <Col>
-              </Col>
-            </Form.Group>
-            {/* <Form.Group as={Row} s="4" controlId="formHorizontalSalesPerson">
-              <Form.Label column >
-                Sales Person
-              </Form.Label>
-              <Col>
-                <Form.Control type="salesPerson" placeholder="Sales Person" />
-              </Col>
-            </Form.Group> */}
-        </Form.Row>
-        
-          <Form.Group as={Row} controlId="formHorizontalDiscount">
-            <Form.Label column sm={2}>
-              Discount
-            </Form.Label>
-            <Col sm={2}>
-              <Form.Control type="text" placeholder="Discount" value="discount" readOnly/>
-            </Col>
-          </Form.Group> 
+        <Table
+          id="Table"
+          striped
+          bordered
+          hover
+          size="sm"
+          style={{ backgroundColor: "#f3f3f3" }}
+        >
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Retail Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
 
-          <Form.Group as={Row} controlId="formHorizontalNetAmount">
-            <Form.Label column sm={2}>
-              Net Amount
-            </Form.Label>
-            <Col sm={2}>
-              <Form.Control type="text" placeholder="Net Amount" value="netAmount" readOnly/>
-            </Col>
-          </Form.Group>
-        </Form>
+          <tbody>
+            {items.map(item => {
+              return (
+                <tr>
+                  <td>{item.itemName}</td>
+                  <td>{item.price}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.price * item.quantity}</td>
+                </tr>
+              );
+            })}
+
+            <tr>
+              <th colSpan="3">Gross Amount</th>
+              <th>{tot}</th>
+            </tr>
+          </tbody>
+        </Table>
       </div>
-    </div>
-    
-  );
+    );
+  }
 }
 
 export default AddSale;

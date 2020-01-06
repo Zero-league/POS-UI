@@ -9,7 +9,7 @@ function ViewSales() {
 
     useEffect(() => {
         
-        fetch("http://localhost:12517/api/bills")
+        fetch("https://localhost:44361/api/bills")
         .then(x => x.json())
         .then(x => {
             setlistSales(x)
