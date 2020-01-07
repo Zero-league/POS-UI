@@ -9,13 +9,13 @@ function App() {
   return (
     <div className="demo-big-content">
     <Layout>
-         <Header className="header-color" title="Point of Sale" style={{backgroundColor: '#2d132c', fontSize: 30}} scroll>
+         <Header className="header-color" title="Point of Sale" style={{backgroundColor: '#2d132c', fontSize: 60}} scroll>
             <Navigation> 
-                <a href="/"><h6>DashBoard</h6></a>
-                <a href="/sales"><h6>Sales & Billing</h6></a>
-                <a href="/inventory"><h6>Inventory</h6></a>
-                <a href="/expenses"><h6>Expenses</h6></a>
-                <a href="/report"><h6>Reports</h6></a>
+                <a href="/" style={{textDecoration:'none'}}><h6>DashBoard</h6></a>
+                <a href="/sales" style={{textDecoration:'none'}}><h6>Sales & Billing</h6></a>
+                <a href="/inventory" style={{textDecoration:'none'}}><h6>Inventory</h6></a>
+                <a href="/expenses" style={{textDecoration:'none'}}><h6>Expenses</h6></a>
+                <a href="/report" style={{textDecoration:'none'}}><h6>Reports</h6></a>
             </Navigation>
         </Header>
         <Drawer title="Point of Sale" style={{backgroundColor: '#2d132c', color: 'white'}}>
