@@ -17,7 +17,7 @@ const AddExpense = () => {
             
         };
         console.log(data);
-        const response = await fetch('http://localhost:12517/api/expense', {
+        const response = await fetch('http://localhost:44361/api/expense', {
           headers: {
                 'Accept': 'application/json, text/plain',
                 'Content-Type': 'application/json;charset=UTF-8'

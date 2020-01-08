@@ -10,7 +10,7 @@ const ViewExpenses = () =>{
     // }
 
     useEffect(() =>{
-        fetch('http://localhost:12517/api/expense')
+        fetch('http://localhost:44361/api/expense')
         .then(x => x.json())
         .then(x => {
             setListExpenses(x);

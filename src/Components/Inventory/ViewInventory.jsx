@@ -23,7 +23,7 @@ function ViewInventory() {
 
     useEffect(() => {
       
-        fetch(`http://localhost:12517/api/Inventories`)
+        fetch(`http://localhost:44361/api/Inventories`)
         .then(x => x.json())
         .then(x => {
             setlistinventory(x)

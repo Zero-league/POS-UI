@@ -25,19 +25,19 @@ function AddInventory(props) {
     const [listMesurement, setlistMesurement] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:12517/api/Catagaries`)
+        fetch(`http://localhost:44361/api/Catagaries`)
             .then(x => x.json())
             .then(x => {
                 setlistCAtogary(x)
             })
 
-        fetch(`http://localhost:12517/api/Locations`)
+        fetch(`http://localhost:44361/api/Locations`)
             .then(y => y.json())
             .then(y => {
                 setlistLocation(y)
             })
 
-        fetch(`http://localhost:12517/api/Unitmesurements`)
+        fetch(`http://localhost:44361/api/Unitmesurements`)
             .then(z => z.json())
             .then(z => {
                 setlistMesurement(z)

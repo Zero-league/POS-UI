@@ -16,7 +16,9 @@ class AddSale extends React.Component {
       tot: "",
       x: "",
       discount: "",
-      netAmount: ""
+      netAmount: "",
+      temp: [],
+      billObj: ""
     };
   }
 
@@ -39,20 +41,68 @@ class AddSale extends React.Component {
       quantity: this.state.quantity
     });
 
+    let temp = [...this.state.temp];
+
+    temp.push({
+      itemsName: this.state.itemName,
+      retailPrice: this.state.price,
+      quantity: this.state.quantity,
+      salesPerson: null,
+      parentBill: null,
+      billId: 1
+    });  
+
     this.setState({
       items,
+      temp,
       itemName: "",
       price: "",
       quantity: "",
       tot: this.state.x,
       id: this.state.id
     });
+
+
+    console.log(items);
+
+      
+
+    console.log(temp);
+
+    // this.state.temp = [{
+    //     itemsName: "Soap",
+    //     quantity: 2,
+    //     retailPrice: 100,
+    //     salesPerson: null,
+    //     parentBill: null,
+    //     billId: 1
+    // }]
+
+    const response =  fetch('https://localhost:44361/api/sales', {
+            headers: {
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            method: 'POST',
+            body: JSON.stringify(this.state.temp)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                alert("Data Saved");
+            }, (error) => {
+                alert("Failed");
+
+            })
+
   };
 
   addPrice = e => {
     this.setState({
       totalAmount: e.target.value
     });
+
   };
 
   handleInputChange = e => {
@@ -82,7 +132,38 @@ class AddSale extends React.Component {
       discount: e.target.value,
       netAmount: this.state.netAmount
     });
-    console.log(discount);
+    console.log("discount is " +this.state.discount);
+  };
+
+  billInputSubmit = e => {
+    console.log("discount is " +this.state.discount);
+
+    let billObj = {
+        dateTime: "2020-01-01T00:00:00",
+        discount: this.state.discount,
+        groceAmount: this.state.tot,
+        netAmount: this.state.netAmount,
+        salesPerson: "A"
+    };
+console.log(billObj);
+
+    const response1 =  fetch('https://localhost:44361/api/bills', {
+            headers: {
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            method: 'POST',
+            body: JSON.stringify(this.state.billObj)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                console.log(data);
+            }, (error) => {
+                alert("Failed");
+
+            })
   };
 
   render() {
@@ -111,8 +192,8 @@ class AddSale extends React.Component {
           className="container"
           style={{ display: "flex", justifyContent: "flex-end" }}
         >
-          <div style={{ justifyContent: "flex-end" }}>
-            <Button variant="success" type="submit">
+          <div>
+            <Button variant="success" type="submit" onClick={this.billInputSubmit}>
               Print
             </Button>
           </div>
@@ -204,7 +285,7 @@ class Table1 extends React.Component {
     const items = this.props.items;
     const tot = this.props.tot;
     const netAmount = this.props.netAmount;
-    const discount = this.props.newDiscount;
+    const discount = this.props.discount;
     console.log(this.props.tot);
 
     return (

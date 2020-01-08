@@ -8,7 +8,7 @@ const handleSubmit =async  (evt) => {
     evt.preventDefault();
 
 
-    const response = await  fetch(`http://localhost:12517/api/Delet/${props.sendid.id}`,{
+    const response = await  fetch(`http://localhost:44361/api/Delet/${props.sendid.id}`,{
           method: 'Delete',
           headers: { 
             'Accept': 'application/json, text/plain',
